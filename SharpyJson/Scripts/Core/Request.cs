@@ -2,7 +2,12 @@
 {
     public class Request
     {
-        public string Token = "";
-        public RequestTypes RequestType = RequestTypes.None;
+        public Request(RequestTypes requestType = RequestTypes.None, string token = "") {
+            RequestType = requestType;
+            Token = token;
+        }
+
+        public RequestTypes RequestType;
+        public string Token;
     }
 }

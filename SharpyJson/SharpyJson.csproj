@@ -53,6 +53,8 @@
     <Compile Include="Scripts\Core\RequestBuilder.cs" />
     <Compile Include="Scripts\Core\RequestTypes.cs" />
     <Compile Include="Scripts\Core\ReturnCodes.cs" />
+    <Compile Include="Scripts\Modules\Queue\RequestQueue.cs" />
+    <Compile Include="Scripts\Modules\Response\Response.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

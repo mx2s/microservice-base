@@ -8,6 +8,7 @@
         FailedServerError = 2,
         
         // INPUT DATA PROBLEMS ( 100 - 199 )
-        FailedWrongInputData = 100
+        FailedWrongInputData = 100,
+        FailedWrongRequestType = 101
     }
 }

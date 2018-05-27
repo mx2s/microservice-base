@@ -23,18 +23,14 @@ namespace SharpyJson
         
         public static void Main(string[] args) {
             
-            
             string json = @"{
               'Token': 'daf12f12',
-              'RequestType': 12,
+              'RequestType': 2,
             }";
-
-            var clientRequest = JsonConvert.DeserializeObject<RawRequest>(json);
             
-            Console.WriteLine();
+            var newRequest = RequestBuilder.Build(json);
             
-            //Enum.IsDefined(typeof(RequestTypes), clientRequest.RequestType)
-            //((RequestTypes)clientRequest.RequestType).ToString()
+            Console.WriteLine(newRequest.Token);
             
             /*
             var wssv = new WebSocketServer ("ws://localhost:9012");
