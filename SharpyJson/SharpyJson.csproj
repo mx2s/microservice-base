@@ -48,19 +48,25 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scripts\Controllers\AuthController.cs" />
     <Compile Include="Scripts\Core\RawRequest.cs" />
     <Compile Include="Scripts\Core\Request.cs" />
     <Compile Include="Scripts\Core\RequestBuilder.cs" />
     <Compile Include="Scripts\Core\RequestTypes.cs" />
     <Compile Include="Scripts\Core\ReturnCodes.cs" />
+    <Compile Include="Scripts\Modules\Auth\AuthModule.cs" />
+    <Compile Include="Scripts\Modules\Processor\RequestProcessor.cs" />
     <Compile Include="Scripts\Modules\Queue\RequestQueue.cs" />
-    <Compile Include="Scripts\Modules\Response\Response.cs" />
+    <Compile Include="Scripts\Modules\Response\RequestResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\Models" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="config.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
