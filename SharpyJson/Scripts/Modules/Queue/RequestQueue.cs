@@ -1,7 +1,7 @@
 ﻿namespace SharpyJson.Scripts.Modules.Queue
 {
     public class RequestQueue
-    {       
+    {
         private static RequestQueue instance;
 
         private RequestQueue() { }

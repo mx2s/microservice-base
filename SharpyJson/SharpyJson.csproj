@@ -55,18 +55,17 @@
     <Compile Include="Scripts\Core\RequestTypes.cs" />
     <Compile Include="Scripts\Core\ReturnCodes.cs" />
     <Compile Include="Scripts\Modules\Auth\AuthModule.cs" />
+    <Compile Include="Scripts\Modules\Debug\DebugLog.cs" />
     <Compile Include="Scripts\Modules\Processor\RequestProcessor.cs" />
     <Compile Include="Scripts\Modules\Queue\RequestQueue.cs" />
     <Compile Include="Scripts\Modules\Response\RequestResponse.cs" />
+    <Compile Include="Scripts\Modules\Settings\SettingsManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\Models" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="config.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
