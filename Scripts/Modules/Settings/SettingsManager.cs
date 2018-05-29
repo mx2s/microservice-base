@@ -27,6 +27,8 @@ namespace SharpyJson.Scripts.Modules.Settings
 
             var streamReader = File.OpenText(@"config.json");
 
+            Console.WriteLine(streamReader.ReadToEnd());
+             
             var schema = JObject.Parse(streamReader.ReadToEnd());
             streamReader.Close();
 
@@ -42,7 +44,7 @@ namespace SharpyJson.Scripts.Modules.Settings
 
             nullCheckList = null;
 
-            // Setting env variables
+            // Setting env varables
             Environment = schema.SelectToken("env").Value<string>();
 
             var dbTokens = new ReadOnlyCollection<string>(new List<string>(new string[] {
