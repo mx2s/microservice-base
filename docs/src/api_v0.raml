@@ -1,0 +1,33 @@
+#%RAML 1.0
+title: Sharpy JSON # required title
+version: 0
+documentation:
+  - title: Description2
+    content: |
+      API v0 JSON API examples can be found here
+
+/auth:
+  description: Registration & authorization 
+
+  /login:
+    displayName: TEST
+
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+                type: |
+                  {
+                    "command": 1, // Login
+                    "data": {
+                      "login": "username",
+                      "password": "password"
+                    }
+                  }
+                example: |
+                  {
+                    "command": 1, // Login
+                    "status": 1, // Success
+                    "token": "fk10d21"
+                  }
