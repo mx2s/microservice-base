@@ -46,14 +46,15 @@ namespace SharpyJson
 
             var processor = RequestProcessor.get();
             processor.process(newRequest);
-            
+
+            User usr = User.Find(2);
+            Console.WriteLine(usr.Password);
+
 //            User.Create(new User() {
 //                Login = "testuser",
 //                Password = "1234"
 //            });
 
-            Console.WriteLine("tst");
-            
             //Console.WriteLine(newRequest.Token);
 
             /*
