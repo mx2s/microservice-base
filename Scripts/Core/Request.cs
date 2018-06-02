@@ -1,20 +1,18 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 
 namespace SharpyJson.Scripts.Core
 {
     public class Request
     {
-        public Request(RequestTypes requestType = RequestTypes.None, string token = "", Dictionary<string, int> data = null) {
+        public Request(RequestTypes requestType = RequestTypes.None, string token = "", JToken data = null) {
             RequestType = requestType;
             Token = token;
             Data = data;
-            if (data == null) {
-                Data = new Dictionary<string, int>();
-            } 
         }
 
         public RequestTypes RequestType;
         public string Token;
-        public Dictionary<string, int> Data;
+        public JToken Data;
     }
 }
