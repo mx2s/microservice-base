@@ -24,16 +24,11 @@ namespace SharpyJson.Scripts.Modules.Settings
 
         private SettingsManager() {
             DbConfig = new Dictionary<string, string>();
-
-            var streamReader = File.OpenText(@"config.json");
-
-            Console.WriteLine(streamReader.ReadToEnd());
              
-            var schema = JObject.Parse(streamReader.ReadToEnd());
-            streamReader.Close();
+            JObject schema = JObject.Parse(File.ReadAllText(@"config.json"));
 
             var nullCheckList = new ReadOnlyCollection<string>(new List<string>(new string[] {
-                "env", "dev.db.host", "dev.db.port", "dev.db.login", "dev.db.pass", "dev.db.db"
+                "env", "dev.db.host", "dev.db.login", "dev.db.pass", "dev.db.db"
             }));
 
             foreach (var checkToken in nullCheckList) {
@@ -48,7 +43,7 @@ namespace SharpyJson.Scripts.Modules.Settings
             Environment = schema.SelectToken("env").Value<string>();
 
             var dbTokens = new ReadOnlyCollection<string>(new List<string>(new string[] {
-                "host", "port", "login", "pass", "db"
+                "host", "login", "pass", "db"
             }));
 
             foreach (var dbToken in dbTokens) {

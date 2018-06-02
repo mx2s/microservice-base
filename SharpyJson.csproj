@@ -76,6 +76,7 @@
     <Compile Include="Scripts\Modules\Queue\RequestQueue.cs" />
     <Compile Include="Scripts\Modules\Response\RequestResponse.cs" />
     <Compile Include="Scripts\Modules\Settings\SettingsManager.cs" />
+    <Compile Include="Scripts\Modules\Validation\ValidationManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

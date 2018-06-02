@@ -16,7 +16,9 @@ namespace SharpyJson
 {
     internal class Program
     {
-        public class Laputa : WebSocketBehavior
+        public const string AppVersion = "v0.2.0";
+        
+        public class ClientService : WebSocketBehavior
         {
             protected override void OnMessage (MessageEventArgs e)
             {
@@ -30,39 +32,19 @@ namespace SharpyJson
         }
         
         public static void Main(string[] args) {
+            Console.WriteLine("SharpyJson " + AppVersion);
+            Console.WriteLine("Press any button to start server...");
+            Console.ReadKey();
 
-            // TODO: remove dummy json
-            string json = @"{
-                'Token': 'daf12f12',
-                'RequestType': 2,
-                'Data': {
-                    'Login': 'admin',
-                    'Pass': '1234'
-                }
-            }";
-            var settingsManager = SettingsManager.get();
-            
-            var newRequest = RequestBuilder.Build(json);
-
-            var processor = RequestProcessor.get();
-            processor.process(newRequest);
-            
-            User.Create(new User() {
-                Login = "testuser",
-                Password = "1234"
-            });
-
-            Console.WriteLine("tst");
-            //Console.WriteLine(newRequest.Token);
-
-            /*
             var wssv = new WebSocketServer ("ws://localhost:9012");
-            wssv.AddWebSocketService<Laputa> ("/");
+            wssv.AddWebSocketService<ClientService> ("/");
+            
             wssv.Start ();
             Console.WriteLine("Server started");
+            Console.WriteLine("Press any button to stop server...");
             Console.ReadKey (true);
+            Console.WriteLine("Server stopped");
             wssv.Stop ();
-            */
         }
     }
 }

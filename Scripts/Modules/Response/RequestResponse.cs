@@ -14,6 +14,7 @@ namespace SharpyJson.Scripts.Modules.Response
                 Data = new Dictionary<string, int>();
             }
         }
+        
         public RequestTypes RequestType;
         public ReturnCodes ReturnCode;
         public Dictionary<string, int> Data;
