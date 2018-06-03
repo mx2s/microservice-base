@@ -4,14 +4,18 @@ namespace SharpyJson.Scripts.Core
 {
     public class RequestBuilder
     {
-        public static Request Build(RawRequest rawRequest) {           
+        public static Request Build(RawRequest rawRequest) {
+            return new Request(
+                GetRequestTypeFromRaw(rawRequest), rawRequest.Token
+            );
+        }
+
+        public static RequestTypes GetRequestTypeFromRaw(RawRequest rawRequest) {
             if (!Enum.IsDefined(typeof(RequestTypes), rawRequest.RequestType)) {
-                return new Request(RequestTypes.None);
+                return RequestTypes.None;
             }
 
-            return new Request(
-                (RequestTypes) rawRequest.RequestType, rawRequest.Token
-            );          
-        }       
+            return (RequestTypes) rawRequest.RequestType;
+        } 
     }
 }

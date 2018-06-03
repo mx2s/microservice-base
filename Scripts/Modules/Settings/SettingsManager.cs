@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using Newtonsoft.Json.Linq;
+using System.Configuration;
 
 namespace SharpyJson.Scripts.Modules.Settings
 {
     public class SettingsManager
     {
-
         private static SettingsManager instance;
 
         public static SettingsManager get() {
@@ -19,40 +16,18 @@ namespace SharpyJson.Scripts.Modules.Settings
             return instance;
         }
 
+        public string configAbsolutePath = null;
+        
         protected string Environment;
         public Dictionary<string, string> DbConfig;
 
         private SettingsManager() {
             DbConfig = new Dictionary<string, string>();
-             
-            JObject schema = JObject.Parse(File.ReadAllText(@"config.json"));
-
-            var nullCheckList = new ReadOnlyCollection<string>(new List<string>(new string[] {
-                "env", "dev.db.host", "dev.db.login", "dev.db.pass", "dev.db.db"
-            }));
-
-            foreach (var checkToken in nullCheckList) {
-                if (schema.SelectToken(checkToken) == null) {
-                    Console.WriteLine("SettingsManager: config.json - token not found: " + checkToken);
-                }
-            }
-
-            nullCheckList = null;
-
-            // Setting env varables
-            Environment = schema.SelectToken("env").Value<string>();
-
-            var dbTokens = new ReadOnlyCollection<string>(new List<string>(new string[] {
-                "host", "login", "pass", "db"
-            }));
-
-            foreach (var dbToken in dbTokens) {
-                DbConfig.Add(dbToken, schema.SelectToken(Environment + ".db." + dbToken).Value<string>());
-            }
-
-            dbTokens = null;
-
-            Console.WriteLine(DbConfig["login"]);
+            
+            DbConfig.Add("host", ConfigurationManager.AppSettings["db_host"]);
+            DbConfig.Add("login", ConfigurationManager.AppSettings["db_login"]);
+            DbConfig.Add("pass", ConfigurationManager.AppSettings["db_pass"]);
+            DbConfig.Add("db", ConfigurationManager.AppSettings["db_name"]);
         }
     }
 }

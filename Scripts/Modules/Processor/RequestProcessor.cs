@@ -1,4 +1,4 @@
-﻿using System;
+﻿using SharpyJson.Scripts.Controllers;
 using SharpyJson.Scripts.Core;
 using SharpyJson.Scripts.Modules.Response;
 
@@ -6,26 +6,21 @@ namespace SharpyJson.Scripts.Modules.Processor
 {
     public class RequestProcessor
     {
-        private static RequestProcessor instance;
-        
-        private RequestProcessor() {}
-
-        public static RequestProcessor get() {
-            if (instance == null) {
-                instance = new RequestProcessor();
-            }
-
-            return instance;
-        }
-
-        public RequestResponse process(Request request) {
-            if (request.RequestType == RequestTypes.None) {
+        public static RequestResponse Process(RawRequest rawRequest) {   
+            var requestType = RequestBuilder.GetRequestTypeFromRaw(rawRequest);
+            
+            if (requestType == RequestTypes.None) {
                 return new RequestResponse(RequestTypes.None, ReturnCodes.FailedWrongRequestType);
             }
 
-            Console.WriteLine((int) request.RequestType);
+            int intRequestType = (int) requestType;
             
-            return new RequestResponse(request.RequestType, ReturnCodes.FailedEmptyResponse);
+            // AUTH
+            if (intRequestType >= 1 && intRequestType < 100) {
+                return AuthController.Process(rawRequest);
+            }
+            
+            return new RequestResponse(requestType, ReturnCodes.FailedEmptyResponse);
         }
     }
 }

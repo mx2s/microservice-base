@@ -12,7 +12,7 @@ namespace SharpyJson.Scripts.Core
         public static RawRequest BuildFromString(string data) {
             var newRequest = new RawRequest();
             JObject schema = JObject.Parse(data);
-            newRequest.Token = schema.SelectToken("token").Value<string>();
+            newRequest.Token = schema.SelectToken("token") != null ? schema.SelectToken("token").Value<string>() : "";
             newRequest.RequestType = schema.SelectToken("type").Value<int>();
             newRequest.Data = schema.SelectToken("data");
             return newRequest;
