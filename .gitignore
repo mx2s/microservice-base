@@ -331,3 +331,5 @@ ASALocalRun/
 migrations/vendor/
 
 docs/yarn\.lock
+
+App\.config

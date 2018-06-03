@@ -11,8 +11,10 @@
         // INPUT DATA PROBLEMS ( 100 - 199 )
         FailedWrongInputData = 100,
         FailedWrongRequestType = 101,
+        FailedUserNotExist = 102,
         
         // AUTH ( 200 - 299 )
         FailedInvalidLoginData = 200,
+        LoginFailed = 201,
     }
 }

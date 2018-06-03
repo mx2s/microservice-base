@@ -1,13 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Schema;
-using SharpyJson.Scripts.Core;
-using SharpyJson.Scripts.Models;
-using SharpyJson.Scripts.Modules.Processor;
 using SharpyJson.Scripts.Modules.Settings;
 using WebSocketSharp;
 using WebSocketSharp.Server;
@@ -16,7 +7,7 @@ namespace SharpyJson
 {
     internal class Program
     {
-        public const string AppVersion = "v0.2.0";
+        public const string AppVersion = "v0.2.1";
         
         public class ClientService : WebSocketBehavior
         {
@@ -32,6 +23,8 @@ namespace SharpyJson
         }
         
         public static void Main(string[] args) {
+            SettingsManager.get();
+            
             Console.WriteLine("SharpyJson " + AppVersion);
             Console.WriteLine("Press any button to start server...");
             Console.ReadKey();

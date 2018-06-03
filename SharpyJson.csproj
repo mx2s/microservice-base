@@ -46,6 +46,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
@@ -68,8 +69,10 @@
     <Compile Include="Scripts\Core\RequestBuilder.cs" />
     <Compile Include="Scripts\Core\RequestTypes.cs" />
     <Compile Include="Scripts\Core\ReturnCodes.cs" />
+    <Compile Include="Scripts\Models\AccessToken.cs" />
     <Compile Include="Scripts\Models\User.cs" />
     <Compile Include="Scripts\Modules\Auth\AuthModule.cs" />
+    <Compile Include="Scripts\Modules\Crypto\HashManager.cs" />
     <Compile Include="Scripts\Modules\DB\DBConnector.cs" />
     <Compile Include="Scripts\Modules\Debug\DebugLog.cs" />
     <Compile Include="Scripts\Modules\Processor\RequestProcessor.cs" />
@@ -80,6 +83,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
