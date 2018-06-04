@@ -7,13 +7,17 @@ namespace SharpyJson.Scripts.Models
 {
     public class User
     {
-        public int Id { get; set; }
-        public string Login { get; set; }
-        public string Password { get; set; }
+        public int id;
+        public string login;
+        public string password;
 
         public static IEnumerable All() {
             var dbConnection = DBConnector.get().GetDbConnection();
             return dbConnection.Query<User>("select * from users");
+        }
+        
+        public static int Count() {
+            return DBConnector.get().GetDbConnection().ExecuteScalar<int>("SELECT COUNT(*) FROM users");
         }
         
         public static User Find(int id) {
@@ -28,12 +32,12 @@ namespace SharpyJson.Scripts.Models
 
         public void Save() {
             var dbConnection = DBConnector.get().GetDbConnection();
-            string sql = $"UPDATE users SET login = '{this.Login}', password = '{this.Password}' WHERE id = @id";
-            DBConnector.get().GetDbConnection().Execute(sql, new {this.Id});
+            string sql = $"UPDATE users SET login = '{this.login}', password = '{this.password}' WHERE id = @id";
+            DBConnector.get().GetDbConnection().Execute(sql, new {Id = this.id});
         }
 
         public static void Create(User newUser) {
-            string sql = $"INSERT INTO public.users(login, password) VALUES ('{newUser.Login}', '{newUser.Password}')"; 
+            string sql = $"INSERT INTO public.users(login, password) VALUES ('{newUser.login}', '{newUser.password}')"; 
             DBConnector.get().GetDbConnection().Execute(sql);
         }
     }

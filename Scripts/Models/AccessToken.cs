@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Dapper;
 using SharpyJson.Scripts.Modules.DB;
@@ -7,13 +8,35 @@ namespace SharpyJson.Scripts.Models
 {
     public class AccessToken
     {
-        public int id { get; set; }
-        public int user_id { get; set; }
-        public string token { get; set; }
+        public int id;
+        public int user_id;
+        public string token;
 
         public static IEnumerable All() {
             var dbConnection = DBConnector.get().GetDbConnection();
-            return dbConnection.Query<User>("select * from users");
+            return dbConnection.Query<AccessToken>("SELECT * FROM access_tokens");
+        }
+
+        public static List<AccessToken> ListAll() {
+            return AccessToken.All().Cast<AccessToken>().ToList();
+        }
+
+        public static IEnumerable GetByUserId(int userId) {
+            var dbConnection = DBConnector.get().GetDbConnection();
+            return dbConnection.Query<AccessToken>("SELECT * FROM access_tokens WHERE user_id = @user_id", new { userId });
+        }
+
+        public static List<AccessToken> GetListByUserId(int userId) {
+            return AccessToken.GetByUserId(1).Cast<AccessToken>().ToList();
+        }
+
+        public static int Count() {
+            return DBConnector.get().GetDbConnection().ExecuteScalar<int>("SELECT COUNT(*) FROM access_tokens");
+        }
+        
+        public static int UserTokensCount(int userId) {
+            return DBConnector.get().GetDbConnection()
+                .ExecuteScalar<int>("SELECT COUNT(*) FROM access_tokens WHERE user_id = @user_id", new { userId });
         }
         
         public static AccessToken Find(int id) {
@@ -23,7 +46,7 @@ namespace SharpyJson.Scripts.Models
         
         public static AccessToken FindByToken(string token) {
             var dbConnection = DBConnector.get().GetDbConnection();
-            return dbConnection.Query<AccessToken>($"SELECT * FROM access_tokens WHERE login = '{token}' LIMIT 1").FirstOrDefault();
+            return dbConnection.Query<AccessToken>($"SELECT * FROM access_tokens WHERE token = '{token}' LIMIT 1").FirstOrDefault();
         }
 
         public void Save() {
@@ -33,7 +56,7 @@ namespace SharpyJson.Scripts.Models
         }
 
         public static void Create(AccessToken newToken) {
-            string sql = $"INSERT INTO public.access_tokens(user_id, token) VALUES ('{newToken.id}', '{newToken.token}')"; 
+            string sql = $"INSERT INTO public.access_tokens(user_id, token) VALUES ('{newToken.user_id}', '{newToken.token}')"; 
             DBConnector.get().GetDbConnection().Execute(sql);
         }
     }

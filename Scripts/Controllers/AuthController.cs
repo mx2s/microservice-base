@@ -13,11 +13,13 @@ namespace SharpyJson.Scripts.Controllers
             switch (requestType) {
                 case RequestTypes.Login:
                     return AuthModule.login(
-                        rawRequest.Data.SelectToken("login").Value<string>(), 
+                        rawRequest.Data.SelectToken("login").Value<string>(),
                         rawRequest.Data.SelectToken("pass").Value<string>()
                     );
                 case RequestTypes.LogOut:
-                    break;
+                    return AuthModule.logout(
+                        rawRequest.Data.SelectToken("token").Value<string>()
+                    );
             }
 
             return new RequestResponse(requestType, ReturnCodes.FailedEmptyResponse);

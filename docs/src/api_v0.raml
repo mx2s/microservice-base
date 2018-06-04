@@ -10,8 +10,6 @@ documentation:
   description: Registration & authorization 
 
   /login:
-    displayName: TEST
-
     get:
       responses:
         200:
@@ -27,7 +25,28 @@ documentation:
                   }
                 example: |
                   {
-                    "command": 1, // Login
+                    "command": 1,
                     "status": 1, // Success
-                    "token": "fk10d21"
+                    "data": {
+                      "token": "42b07d383c334"
+                    }
+                  }
+
+  /logout:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+                type: |
+                  {
+                    "command": 2, // LogOut
+                    "data": {
+                      "token": "42b07d383c334",
+                    }
+                  }
+                example: |
+                  {
+                    "command": 2,
+                    "status": 1, // Success
                   }
