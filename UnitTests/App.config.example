@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<configuration>
+    <appSettings>
+        <add key="db_host" value="localhost"/>
+        <add key="db_login" value="postgres"/>
+        <add key="db_pass" value="1234"/>
+        <add key="db_name" value="sharpy"/>
+    </appSettings>
+</configuration>

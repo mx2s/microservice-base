@@ -174,8 +174,20 @@
   }
 }
 </code></pre><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
-  "command": 1, // Login
+  "command": 1,
   "status": 1, // Success
-  "token": "fk10d21"
+  "data": {
+    "token": "42b07d383c334"
+  }
+}
+</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_auth_logout"><span class="parent">/auth</span>/logout</a> <span class="methods"><a href="#auth_logout_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_auth_logout" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#auth_logout_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="auth_logout_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/auth</span>/logout</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#auth_logout_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="auth_logout_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>:</p><pre><code>{
+  "command": 2, // LogOut
+  "data": {
+    "token": "42b07d383c334",
+  }
+}
+</code></pre><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "command": 2,
+  "status": 1, // Success
 }
 </code></pre></div></div></div></div></div></div></div></div></div></div></div></div><div class="col-md-3"><div id="sidebar" class="hidden-print affix" role="complementary"><ul class="nav nav-pills nav-stacked"><li><a href="#auth">/auth</a></li></ul></div></div></div></div></body></html>

@@ -10,5 +10,10 @@ namespace SharpyJson.Scripts.Modules.Crypto
             byte[] bytes = Encoding.Unicode.GetBytes(input);
             byte[] inArray = HashAlgorithm.Create("SHA1")?.ComputeHash(bytes);
             return Convert.ToBase64String(inArray);
-        }}
+        }
+
+        public static string GenerateToken() {
+            return Guid.NewGuid().ToString("n").Substring(0, new Random().Next(8,16));
+        }        
+    }
 }
