@@ -15,16 +15,16 @@ namespace SharpyJson.Scripts.Models
             var dbConnection = DBConnector.get().GetDbConnection();
             return dbConnection.Query<User>("select * from users");
         }
-        
+
         public static int Count() {
             return DBConnector.get().GetDbConnection().ExecuteScalar<int>("SELECT COUNT(*) FROM users");
         }
-        
+
         public static User Find(int id) {
             var dbConnection = DBConnector.get().GetDbConnection();
             return dbConnection.Query<User>("SELECT * FROM users WHERE id = @id LIMIT 1", new {id}).FirstOrDefault();
         }
-        
+
         public static User FindByLogin(string login) {
             var dbConnection = DBConnector.get().GetDbConnection();
             return dbConnection.Query<User>($"SELECT * FROM users WHERE login = '{login}' LIMIT 1").FirstOrDefault();
@@ -37,7 +37,7 @@ namespace SharpyJson.Scripts.Models
         }
 
         public static void Create(User newUser) {
-            string sql = $"INSERT INTO public.users(login, password) VALUES ('{newUser.login}', '{newUser.password}')"; 
+            string sql = $"INSERT INTO public.users(login, password) VALUES ('{newUser.login}', '{newUser.password}')";
             DBConnector.get().GetDbConnection().Execute(sql);
         }
     }

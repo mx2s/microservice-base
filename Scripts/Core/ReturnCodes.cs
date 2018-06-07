@@ -17,5 +17,7 @@
         // AUTH ( 200 - 299 )
         FailedInvalidLoginData = 200,
         LoginFailed = 201,
+        FailedUserAlreadyExist = 202,
+        FailedInvalidRegisterData = 203
     }
 }

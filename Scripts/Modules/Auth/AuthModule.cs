@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Policy;
+using Newtonsoft.Json.Linq;
 using SharpyJson.Scripts.Core;
 using SharpyJson.Scripts.Models;
 using SharpyJson.Scripts.Modules.Crypto;
@@ -13,20 +14,18 @@ namespace SharpyJson.Scripts.Modules.Auth
 {
     public class AuthModule
     {
-        public static RequestResponse login(string login, string password) {            
+        public static RequestResponse Login(string login, string password) {
             int tokensLimit = 5;
             
             login = ValidationManager.OnlyStringsLettersDigitsSpaces(login);
             password = ValidationManager.OnlyStringsLettersDigitsSpaces(password);
-            
-            string hashedPasword = HashManager.Encrypt(password);
 
             User user = User.FindByLogin(login);
             if (user == null) {
                 return new RequestResponse(RequestTypes.Login, ReturnCodes.FailedUserNotExist);
             }
 
-            if (user.password != hashedPasword) {
+            if (user.password != HashManager.Encrypt(password)) {
                 return new RequestResponse(RequestTypes.Login, ReturnCodes.FailedInvalidLoginData);
             }
            
@@ -47,13 +46,13 @@ namespace SharpyJson.Scripts.Modules.Auth
                 AccessToken.Create(newToken);
             }
 
-            var data = new Dictionary<string, string>();
-            data.Add("token", resultToken);
+            var data = new JObject();
+            data["token"] = resultToken;
             
             return new RequestResponse(RequestTypes.Login, ReturnCodes.Success, data);
         }
 
-        public static RequestResponse logout(string token) {
+        public static RequestResponse Logout(string token) {
             var dbToken = AccessToken.FindByToken(
                 ValidationManager.OnlyStringsLettersDigitsSpaces(token)
             );
@@ -65,6 +64,46 @@ namespace SharpyJson.Scripts.Modules.Auth
             dbToken.Save();
             
             return new RequestResponse(RequestTypes.LogOut, ReturnCodes.Success);
+        }
+
+        public static RequestResponse Register(string login, string password, string email) {
+            login = ValidationManager.OnlyStringsLettersDigitsSpaces(login);
+            password = ValidationManager.OnlyStringsLettersDigitsSpaces(password);
+            email = IsValidEmail(email) ? email : null;
+
+            JObject responseData = new JObject();
+            if (User.FindByLogin(login) != null) {
+                responseData["message"] = "user with this login already exist";
+                return new RequestResponse(RequestTypes.Register, ReturnCodes.FailedUserAlreadyExist, responseData);
+            }
+
+            if (login.Length < 4) {
+                responseData["message"] = "login can't be shorter than 4 symbols";               
+                return new RequestResponse(RequestTypes.Register, ReturnCodes.FailedInvalidRegisterData, responseData);
+            }
+            
+            if (password.Length < 4) {
+                responseData["message"] = "password can't be shorter than 4 symbols";
+                return new RequestResponse(RequestTypes.Register, ReturnCodes.FailedInvalidRegisterData, responseData);
+            }
+            
+            User newUser = new User();
+            newUser.login = login;
+            newUser.password = HashManager.Encrypt(password);
+            User.Create(newUser);
+            
+            return new RequestResponse(RequestTypes.Register, ReturnCodes.Success);
+        }
+
+        private static bool IsValidEmail(string email)
+        {
+            try {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch {
+                return false;
+            }
         }
     }
 }
