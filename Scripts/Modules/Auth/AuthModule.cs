@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Policy;
 using Newtonsoft.Json.Linq;
 using SharpyJson.Scripts.Core;
 using SharpyJson.Scripts.Models;
@@ -94,7 +90,7 @@ namespace SharpyJson.Scripts.Modules.Auth
             
             return new RequestResponse(RequestTypes.Register, ReturnCodes.Success);
         }
-
+        
         private static bool IsValidEmail(string email)
         {
             try {

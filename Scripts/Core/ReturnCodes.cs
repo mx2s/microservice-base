@@ -18,6 +18,9 @@
         FailedInvalidLoginData = 200,
         LoginFailed = 201,
         FailedUserAlreadyExist = 202,
-        FailedInvalidRegisterData = 203
+        FailedInvalidRegisterData = 203,
+        
+        // Microservices (1000 - 1999)
+        FailedNoServicesFound = 1000
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SharpyJson.Scripts.Core;
 
@@ -17,7 +16,7 @@ namespace SharpyJson.Scripts.Modules.Response
         public ReturnCodes ReturnCode;
         public JObject Data;
 
-        public string transform(RequestResponse response) {
+        public string Transform(RequestResponse response) {
             return JsonConvert.SerializeObject(response);
         }
     }

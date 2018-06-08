@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Configuration;
 
 namespace SharpyJson.Scripts.Modules.Settings
@@ -16,18 +15,26 @@ namespace SharpyJson.Scripts.Modules.Settings
             return instance;
         }
 
-        public string configAbsolutePath = null;
-        
+        public string ConfigAbsolutePath = null;
         protected string Environment;
-        public Dictionary<string, string> DbConfig;
+        
+        private readonly int microserviceId;
+        
+        public readonly Dictionary<string, string> DbConfig;
+
+        public int GetMicroserviceId() {
+            return microserviceId;
+        }
 
         private SettingsManager() {
-            DbConfig = new Dictionary<string, string>();
-            
-            DbConfig.Add("host", ConfigurationManager.AppSettings["db_host"]);
-            DbConfig.Add("login", ConfigurationManager.AppSettings["db_login"]);
-            DbConfig.Add("pass", ConfigurationManager.AppSettings["db_pass"]);
-            DbConfig.Add("db", ConfigurationManager.AppSettings["db_name"]);
+            DbConfig = new Dictionary<string, string> {
+                {"host", ConfigurationManager.AppSettings["db_host"]},
+                {"login", ConfigurationManager.AppSettings["db_login"]},
+                {"pass", ConfigurationManager.AppSettings["db_pass"]},
+                {"db", ConfigurationManager.AppSettings["db_name"]}
+            };
+
+            microserviceId = System.Convert.ToInt32(ConfigurationManager.AppSettings["microservice_id"]);
         }
     }
 }

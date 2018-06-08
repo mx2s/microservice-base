@@ -18,7 +18,7 @@ namespace SharpyJson.Scripts.Models
         }
 
         public static List<AccessToken> ListAll() {
-            return AccessToken.All().Cast<AccessToken>().ToList();
+            return All().Cast<AccessToken>().ToList();
         }
 
         public static IEnumerable GetByUserId(int userId) {
@@ -27,7 +27,7 @@ namespace SharpyJson.Scripts.Models
         }
 
         public static List<AccessToken> GetListByUserId(int userId) {
-            return AccessToken.GetByUserId(1).Cast<AccessToken>().ToList();
+            return GetByUserId(userId).Cast<AccessToken>().ToList();
         }
 
         public static int Count() {

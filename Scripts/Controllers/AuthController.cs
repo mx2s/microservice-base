@@ -8,7 +8,7 @@ namespace SharpyJson.Scripts.Controllers
     public class AuthController
     {
         public static RequestResponse Process(RawRequest rawRequest) {
-            RequestTypes requestType = RequestBuilder.GetRequestTypeFromRaw(rawRequest);
+            var requestType = RequestBuilder.GetRequestTypeFromRaw(rawRequest);
 
             switch (requestType) {
                 case RequestTypes.Login:
