@@ -50,6 +50,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Test\Controllers\AuthControllerTests.cs" />
     <Compile Include="Test\Core\RawRequestTests.cs" />
+    <Compile Include="Test\Modules\Microservice\MicroservicesManagerTests.cs" />
     <Compile Include="Test\Modules\Validation\ValidationManagerTests.cs" />
   </ItemGroup>
   <ItemGroup>

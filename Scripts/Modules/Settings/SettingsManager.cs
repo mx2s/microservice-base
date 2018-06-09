@@ -8,9 +8,7 @@ namespace SharpyJson.Scripts.Modules.Settings
         private static SettingsManager instance;
 
         public static SettingsManager get() {
-            if (instance == null) {
-                instance = new SettingsManager();
-            }
+            instance = instance ?? new SettingsManager();
 
             return instance;
         }
