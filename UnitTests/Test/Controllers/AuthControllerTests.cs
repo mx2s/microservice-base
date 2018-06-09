@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Runtime;
+using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using SharpyJson.Scripts.Controllers;
 using SharpyJson.Scripts.Core;
@@ -61,8 +64,8 @@ namespace UnitTests.Test.Controllers
             var response = RequestProcessor.Process(rawRequest);           
             Assert.True(response.RequestType == RequestTypes.LogOut);
             Assert.True(response.ReturnCode == ReturnCodes.Success);
-            
-            var updatedToken = AccessToken.ListAll().First();
+
+            var updatedToken = AccessToken.Find(token.id);
             Assert.True(updatedToken.token != prevToken);
         }
         
@@ -79,6 +82,58 @@ namespace UnitTests.Test.Controllers
             var response = RequestProcessor.Process(rawRequest);           
             Assert.True(response.RequestType == RequestTypes.LogOut);
             Assert.True(response.ReturnCode == ReturnCodes.FailedNotFound);
+        }
+        
+        [Test]
+        public void Test_Register() {
+            // TODO: allow some special symbols like '_'
+            
+            var login = "tempuser" + Guid.NewGuid().ToString("n").Substring(0, new Random().Next(2, 5));
+            var password = "1234";
+            
+            string json = @"{
+                'type': 3,
+                'data': {
+                    'login': '{login}',
+                    'pass': '{password}',
+                    'email': 'someemail'
+                }
+            }"
+                .Replace("{login}", login)
+                .Replace("{password}", password);
+            
+            var rawRequest = RawRequest.BuildFromString(json);
+            var response = RequestProcessor.Process(rawRequest);
+            Assert.True(response.RequestType == RequestTypes.Register);
+            Assert.True(response.ReturnCode == ReturnCodes.Success);
+            var foundUser = User.FindByLogin(login);
+            Assert.True(foundUser != null);
+        }
+        
+        [Test]
+        public void Test_RegisterShortLogin() {
+            var login = "tmp";
+            var password = "1234";
+            
+            string json = @"{
+                'type': 3,
+                'data': {
+                    'login': '{login}',
+                    'pass': '{password}',
+                    'email': 'someemail'
+                }
+            }"
+                .Replace("{login}", login)
+                .Replace("{password}", password);
+            
+            var rawRequest = RawRequest.BuildFromString(json);
+            var response = RequestProcessor.Process(rawRequest);
+            var responseMessage = response.Data["message"].Value<string>();
+            
+            Assert.True(response.RequestType == RequestTypes.Register);
+            Assert.True(response.ReturnCode == ReturnCodes.FailedInvalidRegisterData);
+            Assert.True(responseMessage.Contains("shorter than"));
+            Assert.True(responseMessage.Contains("login"));
         }
     }
 }

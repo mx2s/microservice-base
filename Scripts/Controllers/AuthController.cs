@@ -8,17 +8,23 @@ namespace SharpyJson.Scripts.Controllers
     public class AuthController
     {
         public static RequestResponse Process(RawRequest rawRequest) {
-            RequestTypes requestType = RequestBuilder.GetRequestTypeFromRaw(rawRequest);
+            var requestType = RequestBuilder.GetRequestTypeFromRaw(rawRequest);
 
             switch (requestType) {
                 case RequestTypes.Login:
-                    return AuthModule.login(
-                        rawRequest.Data.SelectToken("login").Value<string>(),
-                        rawRequest.Data.SelectToken("pass").Value<string>()
+                    return AuthModule.Login(
+                        rawRequest.Data.SelectToken("login").Value<string>() ?? "",
+                        rawRequest.Data.SelectToken("pass").Value<string>() ?? ""
                     );
                 case RequestTypes.LogOut:
-                    return AuthModule.logout(
-                        rawRequest.Data.SelectToken("token").Value<string>()
+                    return AuthModule.Logout(
+                        rawRequest.Data.SelectToken("token").Value<string>() ?? ""
+                    );
+                case RequestTypes.Register:
+                    return AuthModule.Register(
+                        rawRequest.Data.SelectToken("login").Value<string>() ?? "",
+                        rawRequest.Data.SelectToken("pass").Value<string>() ?? "",
+                        rawRequest.Data.SelectToken("email").Value<string>() ?? ""
                     );
             }
 
