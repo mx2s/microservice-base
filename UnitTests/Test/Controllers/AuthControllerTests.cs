@@ -15,12 +15,6 @@ namespace UnitTests.Test.Controllers
     public class AuthControllerTests
     {
         [Test]
-        public void Test_EmptyRequest() {
-            var response = AuthController.Process(new RawRequest());
-            Assert.True(response.ReturnCode == ReturnCodes.FailedEmptyResponse);
-        }
-
-        [Test]
         public void Test_LoginRequest() {
             var rawRequest = RawRequest.BuildFromString(@"{
                 'type': 1,

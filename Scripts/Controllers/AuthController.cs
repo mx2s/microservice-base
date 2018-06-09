@@ -1,5 +1,7 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 using SharpyJson.Scripts.Core;
+using SharpyJson.Scripts.Core.Middleware;
 using SharpyJson.Scripts.Modules.Auth;
 using SharpyJson.Scripts.Modules.Response;
 
@@ -9,7 +11,7 @@ namespace SharpyJson.Scripts.Controllers
     {
         public static RequestResponse Process(RawRequest rawRequest) {
             var requestType = RequestBuilder.GetRequestTypeFromRaw(rawRequest);
-
+            
             switch (requestType) {
                 case RequestTypes.Login:
                     return AuthModule.Login(
@@ -28,7 +30,22 @@ namespace SharpyJson.Scripts.Controllers
                     );
             }
 
-            return new RequestResponse(requestType, ReturnCodes.FailedEmptyResponse);
+            var token = (string) rawRequest.Data["token"] ?? "";
+            int userId = rawRequest.Data.Value<int?>("userId") ?? 0;
+            
+            var authMiddleware = AuthMiddleware.IsUserLoggedIn(
+                token, userId
+            );
+
+            if (authMiddleware.Code != ReturnCodes.Success) {            
+               return new RequestResponse(requestType, authMiddleware.Code);
+            }
+
+            authMiddleware = null;
+            
+            // Next request requires auth
+
+            return null;
         }
     }
 }

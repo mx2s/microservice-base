@@ -1,4 +1,5 @@
 ﻿using System;
+using SharpyJson.Scripts.Modules.Websocket;
 using WebSocketSharp;
 using WebSocketSharp.Server;
 
@@ -6,7 +7,7 @@ namespace SharpyJson
 {
     internal class Program
     {
-        public const string AppVersion = "v0.2.2";
+        public const string AppVersion = "v0.2.4";
         
         public class ClientService : WebSocketBehavior
         {
