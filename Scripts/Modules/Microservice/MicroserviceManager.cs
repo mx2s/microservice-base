@@ -1,4 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.Design;
+using System.Runtime.Remoting.Channels;
+using System.Security.Cryptography;
+using System.Xml.Xsl.Runtime;
 using Newtonsoft.Json.Linq;
 using SharpyJson.Scripts.Models.Microservice;
 using SharpyJson.Scripts.Modules.Response;
@@ -18,10 +22,30 @@ namespace SharpyJson.Scripts.Modules.Microservice
             instance = instance ?? new MicroserviceManager();
             return instance;
         }
-        
-        public static RequestResponse SendRequest(MicroserviceTypes microserviceTypes = MicroserviceTypes.None, JObject data = null, bool sendToAll = true, int[] idsToSend = null) {
+
+        public static RequestResponse SendRequest(
+            MicroserviceTypes type, string data, int[] idsToSend = null
+        ) {
+            var sendToAll = idsToSend == null;
             idsToSend = idsToSend ?? new int[0];
-            data = data ?? new JObject();
+
+            var servicesList = MicroserviceManager.get().GetServices(type);
+            var servicesToSend = sendToAll ? servicesList : new Dictionary<int, MicroServiceNode>();
+            
+            if (!sendToAll) {
+                foreach (int index in idsToSend) {
+                    if (servicesList.ContainsKey(index)) {
+                        servicesToSend.Add(index, servicesToSend[index]);
+                    }
+                }
+            }
+            
+            servicesList = null;
+
+            foreach (var service in servicesToSend) {
+                // TODO: Process response
+                service.Value.Client.SendMessage(data);
+            }
 
             return null;
         }

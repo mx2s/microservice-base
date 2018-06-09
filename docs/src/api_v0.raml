@@ -1,8 +1,8 @@
 #%RAML 1.0
-title: Sharpy JSON # required title
+title: Sharpy JSON
 version: 0
 documentation:
-  - title: Description2
+  - title: Sharpy JSON
     content: |
       API v0 JSON API examples can be found here
 
@@ -28,10 +28,10 @@ documentation:
                     "command": 1,
                     "status": 1, // Success
                     "data": {
-                      "token": "42b07d383c334"
+                      "token": "42b07d383c334",
+                      "userId": 2
                     }
                   }
-
   /logout:
     get:
       responses:
@@ -40,13 +40,34 @@ documentation:
             application/json:
                 type: |
                   {
-                    "command": 2, // LogOut
+                    "command": 2, // Logout
                     "data": {
                       "token": "42b07d383c334",
+                      "userId": 2
                     }
                   }
                 example: |
                   {
                     "command": 2,
+                    "status": 1, // Success
+                  }
+  /register:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+                type: |
+                  {
+                    "command": 3, // Register
+                    "data": {
+                      "login": "testuser",
+                      "password": "strongPass",
+                      "email": "testemail@domain.com"
+                    }
+                  }
+                example: |
+                  {
+                    "command": 3,
                     "status": 1, // Success
                   }

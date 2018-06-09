@@ -329,6 +329,7 @@ ASALocalRun/
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
 migrations/vendor/
+migrations/phinx.yml
 
 docs/yarn\.lock
 

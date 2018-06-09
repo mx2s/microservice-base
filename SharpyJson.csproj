@@ -65,6 +65,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scripts\Controllers\AuthController.cs" />
     <Compile Include="Scripts\Controllers\MicroserviceController.cs" />
+    <Compile Include="Scripts\Core\Middleware\AuthMiddleware.cs" />
+    <Compile Include="Scripts\Core\Middleware\MiddlewareResponse.cs" />
     <Compile Include="Scripts\Core\RawRequest.cs" />
     <Compile Include="Scripts\Core\Request.cs" />
     <Compile Include="Scripts\Core\RequestBuilder.cs" />
