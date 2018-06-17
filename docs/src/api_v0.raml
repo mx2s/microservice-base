@@ -17,16 +17,16 @@ documentation:
             application/json:
                 type: |
                   {
-                    "command": 1, // Login
+                    "type": 1, // Login
                     "data": {
                       "login": "username",
-                      "password": "password"
+                      "pass": "password"
                     }
                   }
                 example: |
                   {
-                    "command": 1,
-                    "status": 1, // Success
+                    "type": 1,
+                    "code": 1, // Success
                     "data": {
                       "token": "42b07d383c334",
                       "userId": 2
@@ -40,7 +40,7 @@ documentation:
             application/json:
                 type: |
                   {
-                    "command": 2, // Logout
+                    "type": 2, // Logout
                     "data": {
                       "token": "42b07d383c334",
                       "userId": 2
@@ -48,8 +48,8 @@ documentation:
                   }
                 example: |
                   {
-                    "command": 2,
-                    "status": 1, // Success
+                    "type": 2,
+                    "code": 1, // Success
                   }
   /register:
     get:
@@ -59,15 +59,15 @@ documentation:
             application/json:
                 type: |
                   {
-                    "command": 3, // Register
+                    "type": 3, // Register
                     "data": {
                       "login": "testuser",
-                      "password": "strongPass",
+                      "pass": "strongPass",
                       "email": "testemail@domain.com"
                     }
                   }
                 example: |
                   {
-                    "command": 3,
-                    "status": 1, // Success
+                    "type": 3,
+                    "code": 1, // Success
                   }

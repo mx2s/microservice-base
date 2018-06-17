@@ -16,7 +16,11 @@ namespace SharpyJson.Scripts.Modules.Response
         public ReturnCodes ReturnCode;
         public JObject Data;
 
-        public string Transform(RequestResponse response) {
+        public string Transform() {
+            var response = new JObject();
+            response["type"] = (int) RequestType;
+            response["code"] = (int) ReturnCode;
+            response["data"] = Data;
             return JsonConvert.SerializeObject(response);
         }
     }
