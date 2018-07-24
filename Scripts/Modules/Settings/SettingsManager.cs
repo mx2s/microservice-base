@@ -17,11 +17,21 @@ namespace SharpyJson.Scripts.Modules.Settings
         protected string Environment;
         
         private readonly int microserviceId;
+        private readonly string host;
+        private readonly int port;
         
         public readonly Dictionary<string, string> DbConfig;
 
         public int GetMicroserviceId() {
             return microserviceId;
+        }
+        
+        public string GetHostName() {
+            return host;
+        }
+        
+        public int GetPort() {
+            return port;
         }
 
         private SettingsManager() {
@@ -33,6 +43,9 @@ namespace SharpyJson.Scripts.Modules.Settings
             };
 
             microserviceId = System.Convert.ToInt32(ConfigurationManager.AppSettings["microservice_id"]);
+            
+            host = ConfigurationManager.AppSettings["host_name"];
+            port = System.Convert.ToInt32(ConfigurationManager.AppSettings["host_port"]);
         }
     }
 }

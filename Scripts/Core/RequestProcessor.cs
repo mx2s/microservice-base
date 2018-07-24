@@ -1,8 +1,7 @@
 ﻿using SharpyJson.Scripts.Controllers;
-using SharpyJson.Scripts.Core;
 using SharpyJson.Scripts.Modules.Response;
 
-namespace SharpyJson.Scripts.Modules.Processor
+namespace SharpyJson.Scripts.Core
 {
     public class RequestProcessor
     {
@@ -15,7 +14,7 @@ namespace SharpyJson.Scripts.Modules.Processor
 
             int intRequestType = (int) requestType;
             
-            // AUTH
+            // Auth (1 - 99)
             if (intRequestType >= 1 && intRequestType < 100) {
                 return AuthController.Process(rawRequest);
             }

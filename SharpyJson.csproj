@@ -70,6 +70,7 @@
     <Compile Include="Scripts\Core\RawRequest.cs" />
     <Compile Include="Scripts\Core\Request.cs" />
     <Compile Include="Scripts\Core\RequestBuilder.cs" />
+    <Compile Include="Scripts\Core\RequestProcessor.cs" />
     <Compile Include="Scripts\Core\RequestTypes.cs" />
     <Compile Include="Scripts\Core\ReturnCodes.cs" />
     <Compile Include="Scripts\Models\AccessToken.cs" />
@@ -82,7 +83,6 @@
     <Compile Include="Scripts\Modules\Debug\LogLevels.cs" />
     <Compile Include="Scripts\Modules\Microservice\MicroserviceManager.cs" />
     <Compile Include="Scripts\Modules\Microservice\MicroserviceTypes.cs" />
-    <Compile Include="Scripts\Modules\Processor\RequestProcessor.cs" />
     <Compile Include="Scripts\Modules\Queue\RequestQueue.cs" />
     <Compile Include="Scripts\Modules\Response\RequestResponse.cs" />
     <Compile Include="Scripts\Modules\Settings\SettingsManager.cs" />

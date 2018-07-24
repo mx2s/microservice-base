@@ -21,8 +21,7 @@ namespace SharpyJson.Scripts.Models.Microservice
         public WebsocketClient Client;
 
         public static IEnumerable All() {
-            var dbConnection = DBConnector.get().GetDbConnection();
-            return dbConnection.Query<MicroServiceNode>("SELECT * FROM microservices");
+            return DBConnector.get().GetDbConnection().Query<MicroServiceNode>("SELECT * FROM microservices");
         }
 
         public static List<MicroServiceNode> ListAll() {
@@ -57,11 +56,11 @@ namespace SharpyJson.Scripts.Models.Microservice
         }
 
         public static MicroServiceNode FindByToken(string token) {
-            var dbConnection = DBConnector.get().GetDbConnection();
-            return dbConnection.Query<MicroServiceNode>($"SELECT * FROM microservices WHERE token = '{token}' LIMIT 1")
+            return DBConnector.get().GetDbConnection()
+                .Query<MicroServiceNode>("SELECT * FROM microservices WHERE token = @token LIMIT 1", new {token})
                 .FirstOrDefault();
         }
-        
+
         public MicroserviceTypes GetMicroserviceType() {
             if (!Enum.IsDefined(typeof(MicroserviceTypes), this.service_type)) {
                 return MicroserviceTypes.None;

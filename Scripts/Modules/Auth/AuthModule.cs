@@ -64,7 +64,6 @@ namespace SharpyJson.Scripts.Modules.Auth
 
         public static RequestResponse Register(string login, string password, string email) {
             login = ValidationManager.OnlyStringsLettersDigitsSpaces(login);
-            password = ValidationManager.OnlyStringsLettersDigitsSpaces(password);
             email = IsValidEmail(email) ? email : null;
 
             JObject responseData = new JObject();
@@ -86,7 +85,7 @@ namespace SharpyJson.Scripts.Modules.Auth
             User newUser = new User();
             newUser.login = login;
             newUser.password = HashManager.Encrypt(password);
-            User.Create(newUser);
+            User.Create(login, password);
             
             return new RequestResponse(RequestTypes.Register, ReturnCodes.Success);
         }

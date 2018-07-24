@@ -36,9 +36,12 @@ namespace SharpyJson.Scripts.Models
             DBConnector.get().GetDbConnection().Execute(sql, new {Id = this.id});
         }
 
-        public static void Create(User newUser) {
-            string sql = $"INSERT INTO public.users(login, password) VALUES ('{newUser.login}', '{newUser.password}')";
-            DBConnector.get().GetDbConnection().Execute(sql);
+        public static void Create(string login, string password) {
+            DBConnector.get().GetDbConnection()
+                .Execute(
+                    $"INSERT INTO public.users(login, password) VALUES (@login, @password)"
+                    , new {login, password}
+                );
         }
     }
 }

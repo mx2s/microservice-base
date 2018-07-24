@@ -5,5 +5,10 @@
         <add key="db_login" value="postgres"/>
         <add key="db_pass" value="1234"/>
         <add key="db_name" value="sharpy"/>
+        
+        <add key="microservice_id" value="1"/>
+        
+        <add key="host_name" value="localhost"/>
+        <add key="host_port" value="9012"/>
     </appSettings>
 </configuration>
