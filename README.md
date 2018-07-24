@@ -8,8 +8,8 @@ I'm just a junior developer, keep that in mind if you want to use this platform,
 ### v0.3 Roadmap
 - [x] Controllers
 - [x] Basic auth (login / logout / register)
-- [ ] Basic middleware (auth check)
-- [ ] Microservices (websocket sharp) communication
+- [x] Basic middleware (auth check)
+- [x] Microservices (websocket sharp) communication
 
 ### Docs
 [API v0](https://htmlpreview.github.io/?https://github.com/mxss/sharpy-json/blob/master/docs/api_v0.html)
