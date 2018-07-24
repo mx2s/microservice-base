@@ -1,11 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Runtime.Remoting.Channels;
-using System.Security.Cryptography;
-using System.Xml.Xsl.Runtime;
-using Newtonsoft.Json.Linq;
+using System.Threading;
 using SharpyJson.Scripts.Models.Microservice;
 using SharpyJson.Scripts.Modules.Response;
+using SharpyJson.Scripts.Modules.Websocket;
 
 namespace SharpyJson.Scripts.Modules.Microservice
 {
@@ -26,25 +23,47 @@ namespace SharpyJson.Scripts.Modules.Microservice
         public static RequestResponse SendRequest(
             MicroserviceTypes type, string data, int[] idsToSend = null
         ) {
-            var sendToAll = idsToSend == null;
-            idsToSend = idsToSend ?? new int[0];
-
-            var servicesList = MicroserviceManager.get().GetServices(type);
-            var servicesToSend = sendToAll ? servicesList : new Dictionary<int, MicroServiceNode>();
+            int servicesLimit = 5;
             
-            if (!sendToAll) {
-                foreach (int index in idsToSend) {
-                    if (servicesList.ContainsKey(index)) {
-                        servicesToSend.Add(index, servicesToSend[index]);
+            var sendToAll = idsToSend == null;
+            idsToSend = idsToSend ?? new int[servicesLimit]; // TODO: user idsToSend
+
+            var servicesToSend = new List<MicroServiceNode>();
+            
+            if (sendToAll) {
+                foreach (var service in get().GetServices(type)) {
+                    if (service.Value != null) {
+                        servicesToSend.Add(service.Value);
                     }
                 }
-            }
+            }           
+            var requestsKeys = new int[servicesLimit];
             
-            servicesList = null;
+            for (int i = 0; i < servicesToSend.Count; i++) {
+                if (servicesToSend[i].Client != null) {
+                    requestsKeys[i] = servicesToSend[i].Client.SendMessage(data);
+                }
+            }
 
-            foreach (var service in servicesToSend) {
-                // TODO: Process response
-                service.Value.Client.SendMessage(data);
+            Thread.Sleep(50);
+            
+            int waitIterations = 20;
+            
+            for (int i = 0; i < waitIterations; i++) {
+                foreach (int key in requestsKeys) {
+                    if (key <= 0 || WebsocketRequests.Responses[key] == null) {
+                        continue;
+                    }
+
+                    var response = RequestResponse.BuildFromString(WebsocketRequests.Responses[key]);
+
+                    WebsocketRequests.Responses[key] = null;
+
+                    if (response != null) {
+                        return response;
+                    }
+                }
+                Thread.Sleep(50);
             }
 
             return null;

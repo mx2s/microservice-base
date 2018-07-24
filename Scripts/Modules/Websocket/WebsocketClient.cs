@@ -24,23 +24,16 @@ namespace SharpyJson.Scripts.Modules.Websocket
             ws.Connect();
         }
 
-        public void SendMessage(string message) {
-            while (true) {
-                if (retries >= 5) {
-                    break;
-                }
-                try {
-                    ws.Send(message);
-                    retries = 0;
-                    break;
-                }
-                catch (Exception e) {
-                    DebugLog.get().Fatal("Cannot send message - ws " + host + ":" + port +
-                                         " is closed! => retry: " + retries);
-                    Reconnect();
-                    retries++;
-                }
-            }
+        public int SendMessage(string message) {
+            ws.Send(message);
+
+            int responseKey = WebsocketRequests.GetNextKey();
+
+            WebsocketRequests.Responses[responseKey] = null;
+
+            ws.OnMessage += (sender, e) => { WebsocketRequests.Responses[responseKey] = e.Data; };
+
+            return responseKey;
         }
     }
 }
