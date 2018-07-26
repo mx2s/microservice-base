@@ -68,9 +68,6 @@
     <Compile Include="Scripts\Controllers\MicroserviceController.cs" />
     <Compile Include="Scripts\Core\Middleware\AuthMiddleware.cs" />
     <Compile Include="Scripts\Core\Middleware\MiddlewareResponse.cs" />
-    <Compile Include="Scripts\Core\RawRequest.cs" />
-    <Compile Include="Scripts\Core\Request.cs" />
-    <Compile Include="Scripts\Core\RequestBuilder.cs" />
     <Compile Include="Scripts\Core\RequestProcessor.cs" />
     <Compile Include="Scripts\Core\RequestTypes.cs" />
     <Compile Include="Scripts\Core\ReturnCodes.cs" />
@@ -85,11 +82,15 @@
     <Compile Include="Scripts\Modules\Microservice\MicroserviceManager.cs" />
     <Compile Include="Scripts\Modules\Microservice\MicroserviceTypes.cs" />
     <Compile Include="Scripts\Modules\Queue\RequestQueue.cs" />
+    <Compile Include="Scripts\Modules\Request\RawRequest.cs" />
+    <Compile Include="Scripts\Modules\Request\RequestBuilder.cs" />
+    <Compile Include="Scripts\Modules\Response\Request.cs" />
     <Compile Include="Scripts\Modules\Response\RequestResponse.cs" />
     <Compile Include="Scripts\Modules\Settings\SettingsManager.cs" />
     <Compile Include="Scripts\Modules\Validation\ValidationManager.cs" />
     <Compile Include="Scripts\Modules\Websocket\WebsocketClient.cs" />
     <Compile Include="Scripts\Modules\Websocket\WebsocketRequests.cs" />
+    <Compile Include="Scripts\Transformers\UserTransformer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

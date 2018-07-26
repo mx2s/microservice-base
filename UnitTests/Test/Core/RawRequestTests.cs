@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using NUnit.Framework;
-using SharpyJson.Scripts.Core;
+using SharpyJson.Scripts.Modules.Request;
 
 namespace UnitTests.Test.Core
 {

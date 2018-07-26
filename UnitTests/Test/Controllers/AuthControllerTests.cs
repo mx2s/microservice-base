@@ -4,6 +4,7 @@ using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using SharpyJson.Scripts.Core;
 using SharpyJson.Scripts.Models;
+using SharpyJson.Scripts.Modules.Request;
 
 namespace UnitTests.Test.Controllers
 {

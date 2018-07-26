@@ -1,5 +1,6 @@
 ﻿using System;
 using SharpyJson.Scripts.Core;
+using SharpyJson.Scripts.Modules.Request;
 using SharpyJson.Scripts.Modules.Settings;
 using WebSocketSharp;
 using WebSocketSharp.Server;

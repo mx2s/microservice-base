@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using SharpyJson.Scripts.Core;
 using SharpyJson.Scripts.Core.Middleware;
 using SharpyJson.Scripts.Modules.Auth;
+using SharpyJson.Scripts.Modules.Request;
 using SharpyJson.Scripts.Modules.Response;
 
 namespace SharpyJson.Scripts.Controllers

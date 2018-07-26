@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 
-namespace SharpyJson.Scripts.Core
+namespace SharpyJson.Scripts.Modules.Request
 {
     public class RawRequest
     {

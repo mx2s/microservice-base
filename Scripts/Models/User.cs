@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Linq;
 using Dapper;
 using SharpyJson.Scripts.Modules.DB;
@@ -10,6 +11,8 @@ namespace SharpyJson.Scripts.Models
         public int id;
         public string login;
         public string password;
+        public string email;
+        public DateTime register_date;
 
         public static IEnumerable All() {
             var dbConnection = DBConnector.get().GetDbConnection();

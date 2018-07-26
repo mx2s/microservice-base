@@ -1,11 +1,12 @@
 ﻿using System;
+using SharpyJson.Scripts.Core;
 
-namespace SharpyJson.Scripts.Core
+namespace SharpyJson.Scripts.Modules.Request
 {
     public class RequestBuilder
     {
-        public static Request Build(RawRequest rawRequest) {
-            return new Request(
+        public static Core.Request Build(RawRequest rawRequest) {
+            return new Core.Request(
                 GetRequestTypeFromRaw(rawRequest), rawRequest.Token
             );
         }
