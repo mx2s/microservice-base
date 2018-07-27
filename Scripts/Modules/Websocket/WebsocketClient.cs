@@ -1,6 +1,4 @@
-﻿using System;
-using SharpyJson.Scripts.Modules.Debug;
-using WebSocketSharp;
+﻿using WebSocketSharp;
 
 namespace SharpyJson.Scripts.Modules.Websocket
 {
