@@ -7,6 +7,7 @@ I'm just a junior developer, keep that in mind if you want to use this platform,
 
 ### v0.4 Roadmap
 - [ ] redis client for caching
+- [ ] crypto API's manager -> checking wallet balances & transactions (Eth, Dash, BTC, LTC)
 - [ ] coming soon
 
 ### Docs
