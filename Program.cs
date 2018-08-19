@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using SharpyJson.Scripts.Core;
 using SharpyJson.Scripts.Modules.Request;
 using SharpyJson.Scripts.Modules.Settings;
@@ -9,8 +10,6 @@ namespace SharpyJson
 {
     internal class Program
     {
-        public const string AppVersion = "v0.3";
-
         public class ClientService : WebSocketBehavior
         {
             protected override void OnMessage(MessageEventArgs e) {
@@ -19,13 +18,16 @@ namespace SharpyJson
                     ? "Ok"
                     : "Not ok";
 
-                string responseStr = RequestProcessor.Process(RawRequest.BuildFromString(e.Data)).Transform();
-                Send(responseStr);
+                Send(
+                    RequestProcessor.Process(RawRequest.BuildFromString(e.Data)).Transform()
+                );
             }
         }
 
         public static void Main(string[] args) {
-            Console.WriteLine("SharpyJson " + AppVersion);
+            var appVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            
+            Console.WriteLine("SharpyJson " + appVersion);
             
             var settings = SettingsManager.get();
             

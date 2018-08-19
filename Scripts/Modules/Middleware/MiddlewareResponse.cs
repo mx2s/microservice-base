@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
+using SharpyJson.Scripts.Core;
 
-namespace SharpyJson.Scripts.Core.Middleware
+namespace SharpyJson.Scripts.Modules.Middleware
 {
     public class MiddlewareResponse
     {

@@ -14,37 +14,37 @@ namespace SharpyJson.Scripts.Models
         public string email;
         public DateTime register_date;
 
-        public static IEnumerable All() {
-            var dbConnection = DBConnector.get().GetDbConnection();
-            return dbConnection.Query<User>("select * from users");
-        }
+        public static IEnumerable All()
+            => DBConnector.get().GetDbConnection().Query<User>("select * from users");
 
-        public static int Count() {
-            return DBConnector.get().GetDbConnection().ExecuteScalar<int>("SELECT COUNT(*) FROM users");
-        }
+        public static int Count()
+            => DBConnector.get().GetDbConnection().ExecuteScalar<int>(
+                "SELECT COUNT(*) FROM users"
+            );
 
-        public static User Find(int id) {
-            var dbConnection = DBConnector.get().GetDbConnection();
-            return dbConnection.Query<User>("SELECT * FROM users WHERE id = @id LIMIT 1", new {id}).FirstOrDefault();
-        }
+        public static User Find(int id)
+            => DBConnector.get().GetDbConnection().Query<User>(
+                "SELECT * FROM users WHERE id = @id LIMIT 1",
+                new {id}
+            ).FirstOrDefault();
 
-        public static User FindByLogin(string login) {
-            var dbConnection = DBConnector.get().GetDbConnection();
-            return dbConnection.Query<User>($"SELECT * FROM users WHERE login = '{login}' LIMIT 1").FirstOrDefault();
-        }
+        public static User FindByLogin(string login)
+            => DBConnector.get().GetDbConnection().Query<User>(
+                $"SELECT * FROM users WHERE login = @login LIMIT 1", new {login}
+            ).FirstOrDefault();
 
-        public void Save() {
-            var dbConnection = DBConnector.get().GetDbConnection();
-            string sql = $"UPDATE users SET login = '{this.login}', password = '{this.password}' WHERE id = @id";
-            DBConnector.get().GetDbConnection().Execute(sql, new {Id = this.id});
-        }
+        public void Save()
+            => DBConnector.get().GetDbConnection()
+                .Execute(
+                    "UPDATE users SET login = @login, password = @password WHERE id = @id",
+                    new {login, password, id}
+                );
 
-        public static void Create(string login, string password) {
-            DBConnector.get().GetDbConnection()
+        public static void Create(string login, string password)
+            => DBConnector.get().GetDbConnection()
                 .Execute(
                     $"INSERT INTO public.users(login, password) VALUES (@login, @password)"
                     , new {login, password}
                 );
-        }
     }
 }

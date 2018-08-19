@@ -6,20 +6,20 @@ namespace SharpyJson.Scripts.Transformers
 {
     public class UserTransformer
     {
-        public static JObject Transform(User item) {
-            return new JObject {
+        public static JObject Transform(User item)
+            => new JObject {
                 ["id"] = item.id,
                 ["login"] = item.login,
                 ["email"] = item.email,
                 ["registerDate"] = item.register_date
             };
-        }
-        
-        public static JArray TransformList(List<User> items) {
+
+        public static JArray TransformMultiple(IEnumerable<User> items) {
             JArray result = new JArray();
-            for (int i = 0; i < items.Count; i++) {
-                result.Add(Transform(items[i]));
+            foreach (var item in items) {
+                result.Add(Transform(item));
             }
+
             return result;
         }
     }

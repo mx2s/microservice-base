@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using SharpyJson.Scripts.Models;
+using SharpyJson.Scripts.Modules.Middleware;
 
 namespace SharpyJson.Scripts.Core.Middleware
 {

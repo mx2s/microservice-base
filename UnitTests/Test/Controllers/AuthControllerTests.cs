@@ -93,8 +93,7 @@ namespace UnitTests.Test.Controllers
                 .Replace("{login}", login)
                 .Replace("{password}", password);
             
-            var rawRequest = RawRequest.BuildFromString(json);
-            var response = RequestProcessor.Process(rawRequest);
+            var response = RequestProcessor.Process(RawRequest.BuildFromString(json));
             Assert.True(response.RequestType == RequestTypes.Register);
             Assert.True(response.ReturnCode == ReturnCodes.Success);
             var foundUser = User.FindByLogin(login);

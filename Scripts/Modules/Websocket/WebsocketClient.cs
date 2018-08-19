@@ -5,11 +5,8 @@ namespace SharpyJson.Scripts.Modules.Websocket
     public class WebsocketClient
     {
         private WebSocket ws;
-        public bool Connected;
-        private string host;
-        private int port;
-
-        private int retries = 0;
+        private readonly string host;
+        private readonly int port;
 
         public WebsocketClient(string setHost, int setPort) {
             host = setHost;
