@@ -20,7 +20,7 @@ I'm just a junior developer, keep that in mind if you want to use this platform,
 * WebsocketSharp
 
 ### How to add new endpoints:
-+ add your request category to RequestProcessor (Scripts/Core)
++ add your request category (ex. Auth) to RequestProcessor (Scripts/Core)
 + connect your controller via Process() function which should return RequestResponse
 + in your controller add middleware (if needed) then pass your request parameters to ControllerLogic classes
 + in Logic classes handle your request and then return RequestResponse (example: auth requests logic)
