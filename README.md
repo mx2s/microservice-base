@@ -13,6 +13,11 @@ I'm just a junior developer, keep that in mind if you want to use this platform,
 ### How to setup:
 * currenlty only postgresql db is supported but adding support for mysql should be pretty easy
 * Setup instructions:
+* 1) Install composer
+* 2) Run composer install in /migrations folder
+* 3) Copy & edit phinx.yml (/migrations)
+* 4) In the migrations folder run: vendor/bin/phinx migrate -e development
+* 5) ...
 
 ### Used tools:
 * [Dapper (object mapper for .Net)](https://github.com/StackExchange/Dapper)
