@@ -9,8 +9,7 @@ using SharpyJson.Scripts.Modules.Websocket;
 
 namespace SharpyJson.Scripts.Models.Microservice
 {
-    public class MicroServiceNode
-    {
+    public class MicroServiceNode {
         public int id;
         public int service_id;
         public int service_type;
@@ -20,46 +19,35 @@ namespace SharpyJson.Scripts.Models.Microservice
 
         public WebsocketClient Client;
 
-        public static IEnumerable All() {
-            return DBConnector.get().GetDbConnection().Query<MicroServiceNode>("SELECT * FROM microservices");
-        }
+        public static IEnumerable All() =>
+            DBConnector.get().GetDbConnection().Query<MicroServiceNode>("SELECT * FROM microservices");
 
-        public static List<MicroServiceNode> ListAll() {
-            return All().Cast<MicroServiceNode>().ToList();
-        }
+        public static List<MicroServiceNode> ListAll()
+            => All().Cast<MicroServiceNode>().ToList();
 
-        public static IEnumerable GetByServiceId(int serviceId) {
-            return DBConnector.get().GetDbConnection()
+        public static IEnumerable GetByServiceId(int serviceId)
+            => DBConnector.get().GetDbConnection()
                 .Query<MicroServiceNode>("SELECT * FROM microservices WHERE service_id = @serviceId",
-                    new { serviceId }
+                    new {serviceId}
                 );
-        }
 
-        public static List<MicroServiceNode> GetListByServiceId(int serviceId) {
-            return GetByServiceId(serviceId).Cast<MicroServiceNode>().ToList();
-        }
-        
-        public static MicroServiceNode FindByServiceId(int serviceId) {
-            return DBConnector.get().GetDbConnection()
-                .Query<MicroServiceNode>("SELECT * FROM microservices WHERE id = @id LIMIT 1", new { serviceId })
+        public static List<MicroServiceNode> GetListByServiceId(int serviceId)
+            => GetByServiceId(serviceId).Cast<MicroServiceNode>().ToList();
+
+        public static MicroServiceNode FindByServiceId(int serviceId)
+            => DBConnector.get().GetDbConnection()
+                .Query<MicroServiceNode>("SELECT * FROM microservices WHERE id = @id LIMIT 1", new {serviceId})
                 .FirstOrDefault();
-        }
 
-        public static int Count() {
-            return DBConnector.get().GetDbConnection().ExecuteScalar<int>("SELECT COUNT(*) FROM microservices");
-        }
-        
-        public static MicroServiceNode Find(int id) {
-            return DBConnector.get().GetDbConnection()
-                .Query<MicroServiceNode>("SELECT * FROM microservices WHERE id = @id LIMIT 1", new { id })
+        public static MicroServiceNode Find(int id)
+            => DBConnector.get().GetDbConnection()
+                .Query<MicroServiceNode>("SELECT * FROM microservices WHERE id = @id LIMIT 1", new {id})
                 .FirstOrDefault();
-        }
 
-        public static MicroServiceNode FindByToken(string token) {
-            return DBConnector.get().GetDbConnection()
+        public static MicroServiceNode FindByToken(string token)
+            => DBConnector.get().GetDbConnection()
                 .Query<MicroServiceNode>("SELECT * FROM microservices WHERE token = @token LIMIT 1", new {token})
                 .FirstOrDefault();
-        }
 
         public MicroserviceTypes GetMicroserviceType() {
             if (!Enum.IsDefined(typeof(MicroserviceTypes), this.service_type)) {
