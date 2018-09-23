@@ -9,8 +9,7 @@ using SharpyJson.Scripts.Modules.Websocket;
 
 namespace SharpyJson.Scripts.Models.Microservice
 {
-    public class MicroServiceNode
-    {
+    public class MicroServiceNode {
         public int id;
         public int service_id;
         public int service_type;
@@ -29,7 +28,7 @@ namespace SharpyJson.Scripts.Models.Microservice
         public static IEnumerable GetByServiceId(int serviceId)
             => DBConnector.Get().GetDbConnection()
                 .Query<MicroServiceNode>("SELECT * FROM microservices WHERE service_id = @serviceId",
-                    new { serviceId }
+                    new {serviceId}
                 );
 
         public static List<MicroServiceNode> GetListByServiceId(int serviceId)
