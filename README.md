@@ -5,9 +5,14 @@ Sharpy is a platform (back end json API) built on C# (mono)
  
 I'm just a junior developer, keep that in mind if you want to use this platform, or help me improve it, thanks! :). I see this platform as base / boilerplate for my side projects back end with needed features out of the box. 
 
+### Project structure:
+* a bit modified MVC pattern Controllers are used for
+    * handling requests & middleware
+* all request logic moved into separate classes
+* custom request & error codes
+
 ### Current features:
 * Using as monolith or as microservice (check microservice module)
-* MVC pattern
 * Model transformers (check UserTransformer)
 
 ### How to setup:
@@ -38,6 +43,7 @@ I'm just a junior developer, keep that in mind if you want to use this platform,
 
 ### Incoming features:
 - [ ] redis client for caching
+- [ ] debug mode
 - [ ] ...
 
 ### Docs
