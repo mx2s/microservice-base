@@ -15,36 +15,48 @@ namespace SharpyJson.Scripts.Models
         public DateTime register_date;
 
         public static IEnumerable All()
-            => DBConnector.get().GetDbConnection().Query<User>("select * from users");
+            => DBConnector.Get().GetDbConnection().Query<User>("select * from users");
 
         public static int Count()
-            => DBConnector.get().GetDbConnection().ExecuteScalar<int>(
+            => DBConnector.Get().GetDbConnection().ExecuteScalar<int>(
                 "SELECT COUNT(*) FROM users"
             );
 
         public static User Find(int id)
-            => DBConnector.get().GetDbConnection().Query<User>(
+            => DBConnector.Get().GetDbConnection().Query<User>(
                 "SELECT * FROM users WHERE id = @id LIMIT 1",
                 new {id}
             ).FirstOrDefault();
 
         public static User FindByLogin(string login)
-            => DBConnector.get().GetDbConnection().Query<User>(
-                $"SELECT * FROM users WHERE login = @login LIMIT 1", new {login}
+            => DBConnector.Get().GetDbConnection().Query<User>(
+                "SELECT * FROM users WHERE login = @login LIMIT 1", new {login}
             ).FirstOrDefault();
 
+        public static void Create(string login, string password)
+            => DBConnector.Get().GetDbConnection()
+                .Execute(
+                    "INSERT INTO public.users(login, password) VALUES (@login, @password)"
+                    , new {login, password}
+                );
+
+        public void Create() => Create(login, password);
+
+        public User CreateAndGet() {
+            Create();
+            return FindByLogin(login);
+        }
+
+        public void Refresh() => Find(id);
+
         public void Save()
-            => DBConnector.get().GetDbConnection()
+            => DBConnector.Get().GetDbConnection()
                 .Execute(
                     "UPDATE users SET login = @login, password = @password WHERE id = @id",
                     new {login, password, id}
                 );
 
-        public static void Create(string login, string password)
-            => DBConnector.get().GetDbConnection()
-                .Execute(
-                    $"INSERT INTO public.users(login, password) VALUES (@login, @password)"
-                    , new {login, password}
-                );
+        public void Delete() => DBConnector.Get().GetDbConnection()
+            .Execute("DELETE FROM users WHERE id = @id", new {id});
     }
 }

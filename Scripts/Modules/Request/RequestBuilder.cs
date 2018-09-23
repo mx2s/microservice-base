@@ -3,10 +3,10 @@ using SharpyJson.Scripts.Core;
 
 namespace SharpyJson.Scripts.Modules.Request
 {
-    public class RequestBuilder
+    public static class RequestBuilder
     {
-        public static Core.Request Build(RawRequest rawRequest) {
-            return new Core.Request(
+        public static Response.Request Build(RawRequest rawRequest) {
+            return new Response.Request(
                 GetRequestTypeFromRaw(rawRequest), rawRequest.Token
             );
         }

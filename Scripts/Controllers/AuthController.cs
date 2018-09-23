@@ -40,9 +40,7 @@ namespace SharpyJson.Scripts.Controllers
             if (authMiddleware.Code != ReturnCodes.Success) {            
                return new RequestResponse(requestType, authMiddleware.Code);
             }
-
-            authMiddleware = null;
-            
+          
             // Next request requires auth
 
             return null;

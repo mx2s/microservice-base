@@ -4,7 +4,7 @@ using SharpyJson.Scripts.Modules.Response;
 
 namespace SharpyJson.Scripts.Core
 {
-    public class RequestProcessor
+    public static class RequestProcessor
     {
         public static RequestResponse Process(RawRequest rawRequest) {   
             var requestType = RequestBuilder.GetRequestTypeFromRaw(rawRequest);

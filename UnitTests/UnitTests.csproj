@@ -53,6 +53,7 @@
     <Compile Include="Test\Core\RawRequestTests.cs" />
     <Compile Include="Test\Modules\Microservice\MicroservicesManagerTests.cs" />
     <Compile Include="Test\Modules\Validation\ValidationManagerTests.cs" />
+    <Compile Include="Utils\Data\DataCreatorUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SharpyJson.csproj">

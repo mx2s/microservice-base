@@ -8,7 +8,7 @@ using SharpyJson.Scripts.Modules.Validation;
 
 namespace SharpyJson.Scripts.Modules.Auth
 {
-    public class AuthModule
+    public static class AuthModule
     {
         public static RequestResponse Login(string login, string password) {
             int tokensLimit = 5;
@@ -33,7 +33,6 @@ namespace SharpyJson.Scripts.Modules.Auth
                 var updatedToken = userTokens[new Random().Next(userTokens.Count)];
                 updatedToken.token = resultToken;
                 updatedToken.Save();
-                userTokens = null;
             }
             else {
                 var newToken = new AccessToken();
@@ -82,9 +81,6 @@ namespace SharpyJson.Scripts.Modules.Auth
                 return new RequestResponse(RequestTypes.Register, ReturnCodes.FailedInvalidRegisterData, responseData);
             }
             
-            User newUser = new User();
-            newUser.login = login;
-            newUser.password = HashManager.Encrypt(password);
             User.Create(login, password);
             
             return new RequestResponse(RequestTypes.Register, ReturnCodes.Success);

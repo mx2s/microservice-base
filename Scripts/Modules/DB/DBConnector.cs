@@ -24,7 +24,7 @@ namespace SharpyJson.Scripts.Modules.DB
             dbConnection.Open();
         }
         
-        public static DBConnector get() {
+        public static DBConnector Get() {
             if (instance == null) {
                 instance = new DBConnector();
             }

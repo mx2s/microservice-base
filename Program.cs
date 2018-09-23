@@ -14,9 +14,6 @@ namespace SharpyJson
         {
             protected override void OnMessage(MessageEventArgs e) {
                 Console.WriteLine("Received: " + e.Data);
-                var msg = e.Data == "PINGPONG"
-                    ? "Ok"
-                    : "Not ok";
 
                 Send(
                     RequestProcessor.Process(RawRequest.BuildFromString(e.Data)).Transform()
@@ -31,16 +28,16 @@ namespace SharpyJson
             
             var settings = SettingsManager.get();
             
-            var wssv = new WebSocketServer ("ws://" + settings.GetHostName() + ":" + settings.GetPort());            
+            var websocketServer = new WebSocketServer ("ws://" + settings.GetHostName() + ":" + settings.GetPort());            
             
-            wssv.AddWebSocketService<ClientService> ("/");
+            websocketServer.AddWebSocketService<ClientService> ("/");
             
-            wssv.Start ();
+            websocketServer.Start ();
             Console.WriteLine("Server started");
             Console.WriteLine("Press any button to stop server...");
             Console.ReadKey (true);
             Console.WriteLine("Server stopped");
-            wssv.Stop ();
+            websocketServer.Stop ();
         }
     }
 }
