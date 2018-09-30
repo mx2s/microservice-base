@@ -35,10 +35,10 @@ I'm just a junior developer, keep that in mind if you want to use this platform,
 * ! for unit tests you will also need to configure App.config inside UnitTests project folder
 
 ### Used tools:
-* [Dapper (object mapper for .Net)](https://github.com/StackExchange/Dapper)
-* [Phinx (migrations / PHP)](https://github.com/cakephp/phinx)
+* DB Migrations: [Phinx (migrations / PHP)](https://github.com/cakephp/phinx)
+* Models: [Dapper (object mapper for .Net)](https://github.com/StackExchange/Dapper)
+* Websockets: [WebsocketSharp](https://github.com/sta/websocket-sharp)
 * [Newtonsoft.JSON](https://github.com/JamesNK/Newtonsoft.Json)
-* [WebsocketSharp](https://github.com/sta/websocket-sharp)
 
 ### How to add new endpoints:
 + add your request category (ex. Auth) to RequestProcessor (Scripts/Core)
