@@ -9,7 +9,7 @@ I'm just a junior developer, keep that in mind if you want to use this platform,
 * a bit modified MVC pattern Controllers are used for
     * handling requests & middleware
 * all request logic moved into separate classes
-* custom request & error codes
+* custom request types & error codes
 
 ### Current features:
 * Using as monolith or as microservice (check microservice module)
@@ -19,10 +19,13 @@ I'm just a junior developer, keep that in mind if you want to use this platform,
 * currenlty only postgresql db is supported but adding support for mysql should be pretty easy
 * Setup instructions:
 * 1) Install composer
+* 2) install postgresql & create database
 * 2) Run composer install in /migrations folder
 * 3) Copy & edit phinx.yml (/migrations)
 * 4) In the migrations folder run: vendor/bin/phinx migrate -e development
-* 5) ...
+* 5) copy App.config.example to App.config than edit
+
+* ! for unit tests you will also need to configure App.config inside UnitTests project folder
 
 ### Used tools:
 * [Dapper (object mapper for .Net)](https://github.com/StackExchange/Dapper)
