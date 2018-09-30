@@ -7,7 +7,9 @@ I'm just a junior developer, keep that in mind if you want to use this platform,
 
 ## Contribution
 
-**Want to contribute? Great! Code reviews or any fixes / refactoring or improvements will be much appreciated, thanks :)**
+**Want to contribute? Great!**
+
+**Code reviews or any fixes / refactoring or improvements will be much appreciated, thanks :)**
 
 ### Project structure:
 * a bit modified MVC pattern Controllers are used for
