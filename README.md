@@ -1,5 +1,5 @@
 # sharpy-json 
-Sharpy is a platform (back end json API) built on C# (mono) 
+Sharpy-json is a platform (Websocket API) built on C# (mono), can be used as separate microservice or as monolith 
  
 ### Important (!) 
  
@@ -14,6 +14,7 @@ I'm just a junior developer, keep that in mind if you want to use this platform,
 ### Current features:
 * Using as monolith or as microservice (check microservice module)
 * Model transformers (check UserTransformer)
+* Migrations
 
 ### How to setup:
 * currenlty only postgresql db is supported but adding support for mysql should be pretty easy
