@@ -52,6 +52,7 @@ I'm just a junior developer, keep that in mind if you want to use this platform,
 - [ ] ...
 
 ### Incoming features:
+- [ ] getting started info
 - [ ] redis client for caching
 - [ ] debug mode
 - [ ] ...
