@@ -1,5 +1,5 @@
-# sharpy-json 
-Sharpy-json is a platform (Websocket API) built on C# (mono), can be used as separate microservice or as monolith 
+# microservice-base 
+Platform (Websocket API) built on C# (mono), can be used as separate microservice or as monolith 
  
 ### Important (!) 
  
